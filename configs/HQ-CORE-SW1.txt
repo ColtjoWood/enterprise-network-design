@@ -1,0 +1,184 @@
+HQ-CORE-SW1#show running-config
+Building configuration...
+
+Current configuration : 2830 bytes
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname HQ-CORE-SW1
+!
+!
+no profinet
+!
+!
+!
+!
+!
+ip routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet0/1
+!
+interface FastEthernet0/2
+!
+interface FastEthernet0/3
+!
+interface FastEthernet0/4
+!
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/22
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface FastEthernet0/23
+ no switchport
+ ip address 10.10.255.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/24
+ no switchport
+ ip address 10.10.255.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 00e0.a3e5.2e01
+ ip address 10.10.0.1 255.255.255.128
+ ip helper-address 10.10.1.114
+!
+interface Vlan20
+ mac-address 00e0.a3e5.2e02
+ ip address 10.10.1.97 255.255.255.240
+ ip helper-address 10.10.1.114
+!
+interface Vlan30
+ mac-address 00e0.a3e5.2e03
+ ip address 10.10.1.113 255.255.255.240
+!
+interface Vlan40
+ mac-address 00e0.a3e5.2e04
+ ip address 10.10.0.129 255.255.255.128
+ ip helper-address 10.10.1.114
+!
+interface Vlan50
+ mac-address 00e0.a3e5.2e05
+ ip address 10.10.1.1 255.255.255.192
+ ip helper-address 10.10.1.114
+!
+interface Vlan99
+ mac-address 00e0.a3e5.2e06
+ ip address 10.10.1.65 255.255.255.224
+!
+router ospf 1
+ router-id 4.4.4.4
+ log-adjacency-changes
+ network 10.10.0.0 0.0.255.255 area 0
+ default-information originate
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.10.255.6 
+!
+ip flow-export version 9
+!
+!
+ip access-list extended GUEST-ACL
+ permit ip 10.10.1.0 0.0.0.63 host 10.10.1.1
+ deny ip 10.10.1.0 0.0.0.63 10.10.0.0 0.0.255.255
+ permit ip any any
+access-list 150 permit ip 10.10.1.0 0.0.0.63 host 10.10.1.1
+access-list 150 deny ip 10.10.1.0 0.0.0.63 10.0.0.0 0.255.255.255
+access-list 150 permit ip any any
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+!
+end
